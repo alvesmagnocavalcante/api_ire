@@ -3,7 +3,7 @@ FROM python:3.11-slim
 
 # Defina as variáveis de ambiente
 ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1s
+ENV PYTHONUNBUFFERED 1
 
 # Crie um diretório para a aplicação
 WORKDIR /app
@@ -18,6 +18,5 @@ COPY . .
 # Exponha a porta que a API usará
 EXPOSE 8000
 
-# Execute as migrações e inicie o servidor
-#CMD ["sh", "-c", "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]
-CMD ["gunicorn", "ireAPP.wsgi:application", "--bind", "0.0.0.0:8000"]
+# Execute o Gunicorn para rodar o servidor
+CMD ["gunicorn", "ireApp.wsgi:application", "--bind", "0.0.0.0:8000"]
